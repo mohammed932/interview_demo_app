@@ -1,16 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:interview_test/core/network/network_interface.dart';
 import 'package:interview_test/features/products/data/datasources/products_datasource.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-class MockNetwork extends Mock implements BaseNetwork {} // Create a mock class for BaseNetwork
+import 'product_datasource_test.mocks.dart';
 
+@GenerateMocks([BaseNetwork])
 void main() {
   late ProductsDataSource dataSource;
-  late MockNetwork mockNetwork;
+  late MockBaseNetwork mockNetwork;
 
   setUp(() {
-    mockNetwork = MockNetwork();
+    mockNetwork = MockBaseNetwork();
     dataSource = ProductsDataSource(network: mockNetwork);
   });
 

@@ -6,12 +6,13 @@ import 'package:interview_test/core/errors/failure.dart';
 import 'package:interview_test/core/usecase/base_usecase.dart';
 import 'package:interview_test/features/products/domain/usecases/get_products_usecase.dart';
 import 'package:interview_test/features/products/presentation/blocs/bloc/products_bloc.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../mocks/products_mocks.dart';
+import 'products_bloc_test.mocks.dart';
 
-class MockGetProductsUsecase extends Mock implements GetProductsUsecase {} // Create a mock class for GetProductsUsecase
-
+@GenerateMocks([GetProductsUsecase])
 void main() {
   late ProductsBloc bloc;
   late MockGetProductsUsecase mockUseCase;
@@ -29,7 +30,7 @@ void main() {
     'emits [ProductsLoadingState, ProductsLoadedState] when LoadProductsEvent is added',
     build: () {
       when(mockUseCase(const NoParams())).thenAnswer((_) async => Right(mockProducts));
-      return bloc;
+      return ProductsBloc(productsUseCase: mockUseCase);
     },
     act: (bloc) => bloc.add(LoadProductsEvent()),
     expect: () => [ProductsLoadingState(), ProductsLoadedState(products: mockProducts)],

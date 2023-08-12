@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:interview_test/core/usecase/base_usecase.dart';
 
 import 'core/network/dio_helper.dart';
 import 'core/network/network_interface.dart';
@@ -17,7 +18,7 @@ Future<void> init() async {
   sl.registerFactory(() => ProductsBloc(productsUseCase: sl()));
 
   // Usecases
-  sl.registerLazySingleton(() => GetProductsUsecase(repository: sl()));
+  sl.registerLazySingleton<BaseUseCase>(() => GetProductsUsecase(repository: sl()));
 
   // Repository
   sl.registerLazySingleton<BaseProductRepository>(() => ProductsRepository(productsDataSource: sl()));

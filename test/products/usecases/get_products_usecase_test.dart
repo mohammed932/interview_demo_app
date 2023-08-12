@@ -3,20 +3,20 @@ import 'package:interview_test/core/errors/failure.dart';
 import 'package:interview_test/core/usecase/base_usecase.dart';
 import 'package:interview_test/features/products/domain/repositories/base_product_repository.dart';
 import 'package:interview_test/features/products/domain/usecases/get_products_usecase.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dartz/dartz.dart';
 
 import '../mocks/products_mocks.dart';
+import 'get_products_usecase_test.mocks.dart';
 
-class MockProductRepository extends Mock
-    implements BaseProductRepository {} // Create a mock class for BaseProductRepository
-
+@GenerateMocks([BaseProductRepository])
 void main() {
   late GetProductsUsecase usecase;
-  late MockProductRepository mockRepository;
+  late MockBaseProductRepository mockRepository;
 
   setUp(() {
-    mockRepository = MockProductRepository();
+    mockRepository = MockBaseProductRepository();
     usecase = GetProductsUsecase(repository: mockRepository);
   });
 

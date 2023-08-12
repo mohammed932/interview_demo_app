@@ -15,6 +15,10 @@ class ProductsRepository implements BaseProductRepository {
       return Right(products);
     } on SereverException catch (e) {
       return Left(ServerFailure(message: e.message));
+    } on AppTimeoutException catch (e) {
+      return Left(ServerFailure(message: e.message!));
+    } catch (e) {
+      return const Left(ServerFailure(message: 'unexpected error occured'));
     }
   }
 }

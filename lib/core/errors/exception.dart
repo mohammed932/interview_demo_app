@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 
 class BaseException extends Equatable implements Exception {
@@ -25,4 +27,15 @@ class SereverException extends BaseException {
   }) : super(message, stackTrace);
   @override
   List<Object?> get props => [message, stackTrace, error, endPointUrl, statusCode];
+}
+
+class AppTimeoutException extends TimeoutException {
+  final int statusCode;
+  final String endPointUrl;
+
+  AppTimeoutException({
+    required this.endPointUrl,
+    required String message,
+    required this.statusCode,
+  }) : super(message);
 }

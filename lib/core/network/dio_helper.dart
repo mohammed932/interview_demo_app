@@ -12,6 +12,7 @@ class DioHelper implements BaseNetwork {
   Future get(String endPoint) async {
     try {
       final response = await dio.get(ApiStrings.baseUrl + endPoint);
+
       return response.data;
     } on DioException catch (e) {
       handleDioErrors(e);
@@ -19,6 +20,13 @@ class DioHelper implements BaseNetwork {
   }
 
   handleDioErrors(DioException err) {
+    if (err.type == DioExceptionType.connectionTimeout) {
+      throw AppTimeoutException(
+        endPointUrl: err.requestOptions.path,
+        statusCode: err.response!.statusCode!,
+        message: err.message!,
+      );
+    }
     throw SereverException(
       endPointUrl: err.requestOptions.path,
       error: err.response?.data,

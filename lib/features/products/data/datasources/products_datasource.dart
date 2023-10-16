@@ -11,7 +11,9 @@ class ProductsDataSource implements BaseProductsDataSource {
   Future<List<Product>> getProducts() async {
     try {
       final response = await network.get('products');
-      List<ProductModel> products = response.map<ProductModel>((product) => ProductModel.fromJson(product)).toList();
+      List<ProductModel> products = response
+          .map<ProductModel>((product) => ProductModel.fromJson(product))
+          .toList();
       return products;
     } catch (e) {
       rethrow;

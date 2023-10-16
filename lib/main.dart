@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:interview_test/features/products/presentation/screens/products/products.imports.dart';
-
-import 'injection_container.dart' as di;
+import 'package:interview_test/injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
+  configureDependencies();
   runApp(const MyApp());
 }
 

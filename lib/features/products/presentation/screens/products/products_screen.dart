@@ -11,12 +11,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<ProductsBloc>()..add(LoadProductsEvent()),
+      create: (context) => getIt.get<IProductsBloc>()..add(LoadProductsEvent()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Products'),
         ),
-        body: BlocBuilder<ProductsBloc, ProductsState>(
+        body: BlocBuilder<IProductsBloc, ProductsState>(
           builder: (context, state) {
             if (state is ProductsLoadedState) {
               return ListView.separated(

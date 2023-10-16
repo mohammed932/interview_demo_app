@@ -7,7 +7,11 @@ import '../../../domain/entities/product.dart';
 part 'products_event.dart';
 part 'products_state.dart';
 
-class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
+abstract class IProductsBloc extends Bloc<ProductsEvent, ProductsState> {
+  IProductsBloc(super.initialState);
+}
+
+class ProductsBloc extends IProductsBloc {
   final BaseUseCase productsUseCase;
   ProductsBloc({required this.productsUseCase}) : super(ProductsIntialState()) {
     on<LoadProductsEvent>((event, emit) async {

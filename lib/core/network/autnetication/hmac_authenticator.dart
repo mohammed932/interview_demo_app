@@ -12,7 +12,7 @@ class HmacAuthenticator implements BaseAuthentication {
   AuthenticationSchema schema = AuthenticationSchema.basic;
 
   @override
-  Future<String> call({Map<String, dynamic>? args}) async {
+  Future<String> generate({Map<String, dynamic>? args}) async {
     if (args != null && args.isNotEmpty) {
       final data = _getHmacHashInBase64FromString(args);
       return data;
@@ -37,7 +37,7 @@ class HmacAuthenticator implements BaseAuthentication {
   Future<void> authenticate(
       {required Map<String, dynamic> headers,
       required Map<String, dynamic> body}) async {
-    String token = await call(args: body);
+    String token = await generate(args: body);
     Map<String, String> authObject = {
       key: "${schema.name}${schema.name.isNotEmpty ? ' ' : ''}$token"
     };

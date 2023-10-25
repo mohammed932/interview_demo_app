@@ -8,7 +8,7 @@ class NoneAuthentication implements BaseAuthentication {
   AuthenticationSchema schema = AuthenticationSchema.none;
 
   @override
-  Future<String> call({Map<String, dynamic>? args}) async {
+  Future<String> generate({Map<String, dynamic>? args}) async {
     return "";
   }
 

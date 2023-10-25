@@ -11,7 +11,7 @@ class ReqSescureKeyAuthenticator implements BaseAuthentication {
   AuthenticationSchema schema = AuthenticationSchema.post;
 
   @override
-  Future<String> call({Map<String, dynamic>? args}) async {
+  Future<String> generate({Map<String, dynamic>? args}) async {
     return NetworkSession().token ?? "";
   }
 
@@ -32,7 +32,7 @@ class ReqSescureKeyAuthenticator implements BaseAuthentication {
   Future<void> authenticate(
       {required Map<String, dynamic> headers,
       required Map<String, dynamic> body}) async {
-    String token = await call(args: body);
+    String token = await generate(args: body);
     Map<String, String> authObject = {
       key: "${schema.name}${schema.name.isNotEmpty ? ' ' : ''}$token"
     };

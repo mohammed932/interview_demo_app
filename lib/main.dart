@@ -6,36 +6,17 @@ import 'package:valu_network_layer/valu_network_layer.dart';
 
 import 'core/constants/network_keys.dart';
 import 'core/network/interceptors/interceptors.imports.dart';
+import 'core/utils/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  const env = Environment.DEV;
+
   NetworkConfig(
     local: 'en',
     isDebugMode: true,
     jwtImageAPIKey: NetworkKeys.jwtImageAPIKey(),
-    domains: env == Environment.PROD
-        ? [
-            Domain(
-              domainType: DomainType.Aggregator,
-              url: 'https://mobagg.valu.com.eg',
-            ),
-            Domain(
-              domainType: DomainType.GateWay,
-              url: 'https://mobservices.valu.com.eg',
-            )
-          ]
-        : [
-            Domain(
-              domainType: DomainType.Aggregator,
-              url: 'https://mobagg1.valu.com.eg',
-            ),
-            Domain(
-              domainType: DomainType.GateWay,
-              url: 'https://mobservices1.valu.com.eg',
-            ),
-          ],
+    domains: Utils.getDomains(),
     interceptors: InterceptorUtils.getInterceptors(),
   );
 

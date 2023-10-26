@@ -21,9 +21,9 @@ class AppInterceptor extends Interceptor implements BaseInterceptor {
         NetworkSession.updateSession(token!);
       }
     }
-    if (response.data.toString().toLowerCase().contains("please login again") ||
-        response.statusCode == 401) {
+    if (response.data.toString().toLowerCase().contains("please login again")) {
       throw const UnauthorizedException();
+      // Kill all sessions here
     }
     super.onResponse(response, handler);
   }
@@ -31,5 +31,7 @@ class AppInterceptor extends Interceptor implements BaseInterceptor {
   @override
   void onError(DioError error, ErrorInterceptorHandler handler) {
     super.onError(error, handler);
+    // handle on authorized
+    // kill session
   }
 }

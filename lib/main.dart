@@ -11,7 +11,6 @@ import 'core/utils/utils.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-
   NetworkConfig(
     local: 'en',
     isDebugMode: true,

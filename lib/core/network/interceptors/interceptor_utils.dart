@@ -46,9 +46,13 @@ class InterceptorUtils {
         ],
       );
     }
-    interceptors.add(
-      AppInterceptor(),
+    interceptors.addAll(
+      [
+        AppInterceptor(),
+        UnauthorizedInterceptor(),
+      ],
     );
+
     return interceptors;
   }
 }

@@ -6,17 +6,32 @@ import 'package:valu_network_layer/valu_network_layer.dart';
 
 import 'core/constants/network_keys.dart';
 import 'core/network/interceptors/interceptors.imports.dart';
+import 'core/security/security_settings.dart';
 import 'core/utils/utils.dart';
 
 void main() async {
+  const env = Environment.DEV;
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   NetworkConfig(
     local: 'en',
     isDebugMode: true,
+    isLogEnabled: true,
     jwtImageAPIKey: NetworkKeys.jwtImageAPIKey(),
     domains: Utils.getDomains(),
-    interceptors: InterceptorUtils.getInterceptors(),
+    interceptors: [
+      AppInterceptor(),
+      UnauthorizedInterceptor(),
+      InternetConnectivityInterceptor()
+    ],
+    sslPinning: SSLPinning(
+      isEnabled: env == Environment.PROD,
+      sslFingerprint: NetworkKeys.sslFingerprint,
+    ),
+    proxy: Proxy(
+      isEnabled: env != Environment.PROD,
+      proxy: SecuritySettingsConfig.instatnce.proxyConfigurations.proxy,
+    ),
   );
 
   runApp(const MyApp());

@@ -16,9 +16,10 @@ class _TestScreenState extends State<TestScreen> {
       var queryParameters = {
         'q': 'e',
       };
-      final Map<String, dynamic> response = await RemoteServiceInjector()
-          .remoteService(
-              url: ValuStaticDataEndpoints.getEmployers(queryParameters));
+      final Map<String, dynamic> response =
+          await RemoteServiceInjector().remoteService(
+        url: ValuStaticDataEndpoints.getEmployers(queryParameters),
+      );
       print(response);
     } catch (e) {
       print(e);
@@ -26,22 +27,22 @@ class _TestScreenState extends State<TestScreen> {
   }
 
   sendOtp() async {
-    try {
-      Map<String, dynamic> body = {
-        'custLang': "EN",
-        'mobileNumber': "01068568498",
-        'refNumber': "890771",
-        'aggregatorId': "MobApp",
-        "reqSecureKey": "Ej1sqlRHvvmfZrhGJY+Whg=="
-      };
-      Map<String, dynamic> response =
-          await RemoteServiceInjector().remoteService(
-        url: ValuStaticDataEndpoints.sendOtp(body),
-      );
-      print(response);
-    } catch (e) {
-      print(e);
-    }
+    // try {
+    //   Map<String, dynamic> body = {
+    //     'custLang': "EN",
+    //     'mobileNumber': "01068568498",
+    //     'refNumber': "890771",
+    //     'aggregatorId': "MobApp",
+    //     "reqSecureKey": "Ej1sqlRHvvmfZrhGJY+Whg=="
+    //   };
+    //   Map<String, dynamic> response =
+    //       await RemoteServiceInjector().remoteService(
+    //     url: ValuStaticDataEndpoints.sendOtp(body),
+    //   );
+    //   print(response);
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 
   @override
@@ -52,7 +53,7 @@ class _TestScreenState extends State<TestScreen> {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => sendOtp(),
+          onPressed: () => callApi(),
           child: const Text("Ok"),
         ),
       ),

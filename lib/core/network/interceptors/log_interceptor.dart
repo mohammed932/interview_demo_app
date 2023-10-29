@@ -3,10 +3,6 @@ part of 'interceptors.imports.dart';
 class LoggerInterceptor extends Interceptor implements BaseInterceptor {
   final ValuLocalLogger<Map<String, dynamic>> _localLogger =
       ValuLocalLogger<Map<String, dynamic>>(LoggerType.Network);
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    super.onRequest(options, handler);
-  }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {

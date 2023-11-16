@@ -12,7 +12,6 @@ class TestScreen extends StatefulWidget {
 class _TestScreenState extends State<TestScreen> {
   callApi() async {
     try {
-      NetworkConfig.changeLocal(local: 'ar');
       var queryParameters = {
         'q': 'e',
       };

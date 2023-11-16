@@ -21,7 +21,8 @@ void main() {
   });
 
   test('call returns a list of products', () async {
-    when(mockRepository.getProducts()).thenAnswer((_) async => Right(mockProducts));
+    when(mockRepository.getProducts())
+        .thenAnswer((_) async => Right(mockProducts));
 
     final result = await usecase(const NoParams());
 
@@ -30,7 +31,8 @@ void main() {
 
   test('call handles repository failure', () async {
     final mockFailure = ServerFailure(message: 'Server error');
-    when(mockRepository.getProducts()).thenAnswer((_) async => Left(mockFailure));
+    when(mockRepository.getProducts())
+        .thenAnswer((_) async => Left(mockFailure));
 
     final result = await usecase(const NoParams());
 

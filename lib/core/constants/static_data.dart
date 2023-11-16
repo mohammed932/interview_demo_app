@@ -1,3 +1,4 @@
+import 'package:interview_test/core/network/domains/domains.imports.dart';
 import 'package:valu_network_layer/valu_network_layer.dart';
 
 import '../network/autnetication/authenticator.imports.dart';
@@ -6,7 +7,7 @@ import 'collections.dart';
 class ValuStaticDataEndpoints {
   static ValuEndpoint generateJwtToken(Map<String, dynamic> body) =>
       ValuEndpoint(
-        domainType: DomainType.GateWay,
+        domain: Gateway(),
         collection: AuthCollection(),
         hostType: HostType.Default,
         method: HttpMethod.POST,
@@ -15,6 +16,7 @@ class ValuStaticDataEndpoints {
         requiresGatewayId: true,
       );
   static ValuEndpoint getEmployers(Map<String, dynamic> query) => ValuEndpoint(
+        domain: Gateway(),
         collection: CmsCollection(),
         method: HttpMethod.GET,
         endpoint: "employers",
@@ -22,7 +24,7 @@ class ValuStaticDataEndpoints {
       );
 
   static ValuEndpoint sendOtp(Map<String, dynamic> body) => ValuEndpoint(
-        domainType: DomainType.GateWay,
+        domain: Gateway(),
         collection: AppCollection(),
         method: HttpMethod.POST,
         hostType: HostType.Default,
